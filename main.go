@@ -19,7 +19,7 @@ import (
 
 var upgrader = websocket.Upgrader{} // use default options
 
-var addr = flag.String("addr", "localhost:8082", "http service address")
+var addr = flag.String("addr", "0.0.0.0:8082", "http service address")
 var backwardCompat = flag.Bool("backward", false, "backwards compatibility config")
 
 var persistentIds []string
