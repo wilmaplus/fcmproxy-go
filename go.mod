@@ -1,6 +1,6 @@
 module fcmproxy-go
 
-go 1.20
+go 1.21.5
 
 require (
 	github.com/BRUHItsABunny/gOkHttp v0.3.0 // indirect
