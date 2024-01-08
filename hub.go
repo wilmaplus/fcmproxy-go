@@ -117,9 +117,11 @@ func (h *Hub) run() {
 				close(client.send)
 			}
 		case message := <-h.broadcast:
+			tempBuf := message
+			h.broadcast = nil
 			for client := range h.clients {
 				select {
-				case client.send <- message:
+				case client.send <- tempBuf:
 				default:
 					close(client.send)
 					delete(h.clients, client)
