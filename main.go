@@ -47,7 +47,7 @@ func GenerateNewDeviceAndAuth(appData *firebase_api.FirebaseAppData) *firebase_a
 		log.Fatal(err)
 	}
 
-	fClient := firebase.NewFirebaseClient(hClient, fDevice)
+	fClient, _ := firebase.NewFirebaseClient(hClient, fDevice)
 	_, err = fClient.NotifyInstallation(ctx, appData)
 	if err != nil {
 		log.Fatal(err)
@@ -153,7 +153,7 @@ func InitListener() {
 		log.Fatal(err)
 	}
 
-	fClient := firebase.NewFirebaseClient(client, fDevice)
+	fClient, _ := firebase.NewFirebaseClient(client, fDevice)
 
 	err = fClient.MTalk.Connect()
 	if err != nil {
@@ -205,6 +205,7 @@ func handleIncomingPersistentIds(receivedIds []string) {
 }
 
 func socket(w http.ResponseWriter, r *http.Request) {
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	c, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Print("upgrade:", err)
